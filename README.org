@@ -1,1 +1,1 @@
-usefull scripts for my manjaro workspace, which based on theniceboy repo and kiteab repo.
+usefull scripts for my manjaro/arch workspace, which based on theniceboy repo and kiteab repo.
