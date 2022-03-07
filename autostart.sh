@@ -14,4 +14,5 @@ fcitx5 &
 #/bin/bash ~/scripts/run-mailsync.sh &
 /bin/bash ~/scripts/kb-off.sh &
 /bin/bash ~/scripts/setxmodmap-colemak.sh &
+/bin/bash ~/scripts/autonutstore.sh &
 /bin/bash ~/scripts/autostart_wait.sh &
