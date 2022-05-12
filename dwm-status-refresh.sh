@@ -16,20 +16,20 @@ function get_bytes {
 # Speed is shown in KByte per second when greater or equal than 1 KByte per second.
 # This function should be called each second.
 
-function get_velocity {
-	value=$1
-	old_value=$2
-	now=$3
-
-	timediff=$(($now - $old_time))
-	velKB=$(echo "1000000000*($value-$old_value)/1024/$timediff" | bc)
-	if test "$velKB" -gt 1024;
-	then
-		echo $(echo "scale=2; $velKB/1024" | bc)MB/s
-	else
-		echo ${velKB}KB/s
-	fi
-}
+#function get_velocity {
+#	value=$1
+#	old_value=$2
+#	now=$3
+#
+#	timediff=$(($now - $old_time))
+#	velKB=$(echo "1000000000*($value-$old_value)/1024/$timediff" | bc)
+#	if test "$velKB" -gt 1024;
+#	then
+#		echo $(echo "scale=2; $velKB/1024" | bc)MB/s
+#	else
+#		echo ${velKB}KB/s
+#	fi
+#}
 
 # Get initial values
 get_bytes
@@ -62,7 +62,7 @@ print_temp(){
 get_time_until_charged() {
 
 	# parses acpitool's battery info for the remaining charge of all batteries and sums them up
-	sum_remaining_charge=$(acpitool -B | grep -E 'Remaining capacity' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
+	#sum_remaining_charge=$(acpitool -B | grep -E 'Remaining capacity' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
 
 	# finds the rate at which the batteries being drained at
 	present_rate=$(acpitool -B | grep -E 'Present rate' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
@@ -101,7 +101,7 @@ get_time_until_charged() {
 
 
 
-print_bat(){
+#print_bat(){
 	#hash acpi || return 0
 	#onl="$(grep "on-line" <(acpi -V))"
 	#charge="$(awk '{ sum += $1 } END { print sum }' /sys/class/power_supply/BAT*/capacity)%"
@@ -116,8 +116,8 @@ print_bat(){
 		#echo -e "${charge}"
 	#fi
 	#echo "$(get_battery_charging_status) $(get_battery_combined_percent)%, $(get_time_until_charged )";
-	echo "[ $(get_battery_charging_status) $(get_battery_combined_percent)% $(get_time_until_charged ) ]";
-}
+	#echo "[ $(get_battery_charging_status) $(get_battery_combined_percent)% $(get_time_until_charged ) ]";
+#}
 
 print_date(){
 	date '+%Y-%m-%d %H:%M'
@@ -145,7 +145,7 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_pulse.sh"
 . "$DIR/dwmbar-functions/dwm_weather.sh"
 #. "$DIR/dwmbar-functions/dwm_vpn.sh"
-#. "$DIR/dwmbar-functions/dwm_network.sh"
+. "$DIR/dwmbar-functions/dwm_network.sh"
 #. "$DIR/dwmbar-functions/dwm_keyboard.sh"
 #. "$DIR/dwmbar-functions/dwm_ccurse.sh"
 #. "$DIR/dwmbar-functions/dwm_date.sh"
@@ -153,14 +153,14 @@ export IDENTIFIER="unicode"
 get_bytes
 
 # Calculates speeds
-vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
-vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
+#vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
+#vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
 # xsetroot -name " 💿 $(print_mem)M ⬆️ $vel_trans ⬇️ $vel_recv $(dwm_alsa) $(dwm_weather)  $(print_bat)  $(print_date) "
 # xsetroot -name " 💿 $(print_mem)M ⬆️ $vel_trans ⬇️ $vel_recv $(dwm_alsa)  $(print_bat)  $(print_date) "
 
-xsetroot -name " 💿 $(print_mem)M $(dwm_alsa)  $(print_bat)  $(print_date) "
-# xsetroot -name " 💿 $(print_mem)M $(dwm_alsa) $(dwm_weather)  $(print_bat)  $(print_date) "
+#xsetroot -name " 💿 $(print_mem)M $(dwm_alsa) $(print_date) "
+xsetroot -name " 💿 $(print_mem)M $(dwm_alsa) $(dwm_weather) $(print_date)"
 
 # Update old values to perform new calculations
 old_received_bytes=$received_bytes

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 /bin/bash ~/scripts/dwm-status.sh &
+/bin/bash ~/scripts/dwm-bar.sh &
 /bin/bash ~/scripts/tap-to-click.sh &
 /bin/bash ~/scripts/inverse-scroll.sh &
 /bin/bash ~/scripts/wp-autochange.sh &
