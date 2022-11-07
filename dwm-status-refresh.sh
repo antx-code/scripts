@@ -149,6 +149,7 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_keyboard.sh"
 #. "$DIR/dwmbar-functions/dwm_ccurse.sh"
 #. "$DIR/dwmbar-functions/dwm_date.sh"
+. "$DIR/dwmbar-functions/dwm_binance.sh"
 
 get_bytes
 
@@ -160,7 +161,7 @@ get_bytes
 # xsetroot -name " 💿 $(print_mem)M ⬆️ $vel_trans ⬇️ $vel_recv $(dwm_alsa)  $(print_bat)  $(print_date) "
 
 #xsetroot -name " 💿 $(print_mem)M $(dwm_alsa) $(print_date) "
-xsetroot -name " 💿 $(print_mem)M $(dwm_alsa) $(dwm_weather) $(print_date)"
+xsetroot -name " 💿 $(print_mem)M|$(dwm_alsa)|$(dwm_binance)|$(print_date)"
 
 # Update old values to perform new calculations
 old_received_bytes=$received_bytes
