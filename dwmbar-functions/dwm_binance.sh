@@ -13,7 +13,8 @@ dwm_binance () {
     if [ "$http_code" -eq "405" ]
     then
 #      last_price=`curl -s $binance_kline | jq -r '.[0].lastPrice'`
-      last_price=`curl -v --stderr - $binance_kline | grep -oP '(?<="lastPrice":")[^"]*'`
+      last=`curl -v --stderr - $binance_kline | grep -oP '(?<="lastPrice":")[^"]*'`
+      last_price=`awk -v x=1 -v y=$last 'BEGIN{printf "%.2f\n",x*y}'`
     else
       last_price="NError"
     fi
