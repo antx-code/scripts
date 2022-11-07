@@ -131,6 +131,8 @@ show_record(){
 }
 
 
+export SEP1="["
+export SEP2="]"
 LOC=$(readlink -f "$0")
 DIR=$(dirname "$LOC")
 export IDENTIFIER="unicode"
@@ -143,12 +145,12 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_backlight.sh"
 . "$DIR/dwmbar-functions/dwm_alsa.sh"
 #. "$DIR/dwmbar-functions/dwm_pulse.sh"
-. "$DIR/dwmbar-functions/dwm_weather.sh"
+#. "$DIR/dwmbar-functions/dwm_weather.sh"
 #. "$DIR/dwmbar-functions/dwm_vpn.sh"
-. "$DIR/dwmbar-functions/dwm_network.sh"
+#. "$DIR/dwmbar-functions/dwm_network.sh"
 #. "$DIR/dwmbar-functions/dwm_keyboard.sh"
 #. "$DIR/dwmbar-functions/dwm_ccurse.sh"
-#. "$DIR/dwmbar-functions/dwm_date.sh"
+. "$DIR/dwmbar-functions/dwm_date.sh"
 . "$DIR/dwmbar-functions/dwm_binance.sh"
 
 get_bytes
@@ -161,7 +163,7 @@ get_bytes
 # xsetroot -name " 💿 $(print_mem)M ⬆️ $vel_trans ⬇️ $vel_recv $(dwm_alsa)  $(print_bat)  $(print_date) "
 
 #xsetroot -name " 💿 $(print_mem)M $(dwm_alsa) $(print_date) "
-xsetroot -name " 💿 $(print_mem)M|$(dwm_alsa)|$(dwm_binance)|$(print_date)"
+xsetroot -name "$(dwm_alsa)$(dwm_binance)[$(print_date)]"
 
 # Update old values to perform new calculations
 old_received_bytes=$received_bytes
