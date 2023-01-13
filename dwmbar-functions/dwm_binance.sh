@@ -8,12 +8,12 @@
 binance_kline="https://dapi.binance.com/dapi/v1/ticker/24hr?symbol=BTCUSD_PERP"
 btc_icon="₿"
 dwm_binance () {
-    http_code=`curl -I -m 10 -o /dev/null -s -w %{http_code} $binance_kline`
+    http_code=`curl --proxy http://127.0.0.1:7890 -I -m 10 -o /dev/null -s -w %{http_code} $binance_kline`
 
     if [ "$http_code" -eq "405" ]
     then
 #      last_price=`curl -s $binance_kline | jq -r '.[0].lastPrice'`
-      last=`curl -v --stderr - $binance_kline | grep -oP '(?<="lastPrice":")[^"]*'`
+      last=`curl --proxy http://127.0.0.1:7890 -v --stderr - $binance_kline | grep -oP '(?<="lastPrice":")[^"]*'`
       last_price=`awk -v x=1 -v y=$last 'BEGIN{printf "%.2f\n",x*y}'`
     else
       last_price="NError"
