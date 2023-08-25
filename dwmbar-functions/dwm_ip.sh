@@ -12,12 +12,7 @@ dwm_ip () {
 
     if [ $aa -eq 0 ]
     then
-      #IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-      IP=$(curl ip.cip.cc)
-
-      if [[ "$IP" == "" ]]; then
-          IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-      fi
+      IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
     else
       IP=$(ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1 -d'/')
     fi
